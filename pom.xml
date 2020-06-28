@@ -111,11 +111,11 @@
             <version>2.7.0</version>
         </dependency>
 
-        <!--
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
+            <version>3.6.1</version>
+            <scope>compile</scope>
         </dependency>-->
     </dependencies>
 
@@ -127,6 +127,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <!--<version>3.1</version>-->
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -143,9 +144,7 @@
                     <!-- 通过maven tomcat7:run运行项目时，访问项目的端口号 -->
                     <port>80</port>
                     <!-- 项目访问路径  本例：localhost:9090,  如果配置的aa， 则访问路径为localhost:9090/aa-->
-                    <path>/travel</path>
-                    <forkMode>once</forkMode>
-                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <path>/</path>
                 </configuration>
             </plugin>
         </plugins>

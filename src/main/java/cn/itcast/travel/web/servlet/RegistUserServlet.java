@@ -2,8 +2,10 @@ package cn.itcast.travel.web.servlet;
 
 import cn.itcast.travel.domain.ResultInfo;
 import cn.itcast.travel.domain.User;
+import cn.itcast.travel.service.UserService;
+import cn.itcast.travel.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.BeanUtils;
+import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +57,20 @@ public class RegistUserServlet extends HttpServlet {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
+
+        // calling query of service
+        UserService service = new UserServiceImpl();
+        boolean flag = service.regist(user);
+        ResultInfo info = new ResultInfo();
+
+        if (flag) {
+            info.setFlag(true);
+        } else {
+            info.setFlag(false);
+            info.setErrorMsg("Regist Fail!");
+        }
+
+
 
     }
 
