@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     /**
-     * querying information of user.
+     * querying user information specified username
      * @param username
      * @return
      */
@@ -20,27 +20,27 @@ public class UserDaoImpl implements UserDao {
         User user = null;
         try {
             String sql = "SELECT * FROM tab_user WHERE username = ?";
-            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>
-                    (User.class), username);
-        } catch (Exception e) {
 
+            user = template.queryForObject(sql, new BeanPropertyRowMapper<User>(User.class), username);
+        } catch (Exception e) {
+            //e.printStackTrace();
         }
 
         return user;
     }
 
     /**
-     * saving user's information inserted into user table.
+     * saving user information
      * @param user
      */
     @Override
     public void save(User user) {
-        String sql = "INSERT INTO tab_user(username, password, name, birthday, " +
-                "sex, telephone, email)VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tab_user(username, password, name, birthday, sex, telephone, email)" +
+                "VALUES(?,?,?,?,?,?,?)";
 
         template.update(sql, user.getUsername(), user.getPassword(),
-                        user.getName(), user.getBirthday(),
-                        user.getSex(), user.getTelephone(),
-                        user.getEmail());
+                        user.getName(), user.getBirthday(), user.getSex(),
+                user.getTelephone(), user.getEmail());
     }
+
 }

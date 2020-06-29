@@ -59,15 +59,17 @@
 
             $(function () {
                 // when form submits, calling all check method
-            	$("#registerForm").submit(function () {
+            	$("#registerForm").submit(function() {
                     //return checkUsername() && checkPassword() && checkEmail();
 					if (checkUsername() && checkPassword() && checkEmail()) {
-                        $.post("regisUserServlet", $(this).serialize(), function (data) {
+                        $.post("registUserServlet", $(this).serialize(), function (data) {
 							//dealing with corresponding data from server
 
                         });
                     }
                     return false;
+
+					/*return checkEmail() && checkPassword() && checkUsername();*/
             	});
 
 				// when component lose focus, calling corresponding method

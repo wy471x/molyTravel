@@ -58,18 +58,26 @@ public class RegistUserServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // calling query of service
+        // calling regist function to finish user register
         UserService service = new UserServiceImpl();
         boolean flag = service.regist(user);
         ResultInfo info = new ResultInfo();
 
         if (flag) {
             info.setFlag(true);
+            info.setErrorMsg("Regist Success!");
         } else {
             info.setFlag(false);
             info.setErrorMsg("Regist Fail!");
         }
 
+        // info object serialized as json
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(info);
+
+        // writting json back to client
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(json);
 
 
     }
