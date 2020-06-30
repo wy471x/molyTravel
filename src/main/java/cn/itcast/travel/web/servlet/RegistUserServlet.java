@@ -35,7 +35,7 @@ public class RegistUserServlet extends HttpServlet {
 
             // register fail
             info.setFlag(false);
-            info.setErrorMsg("Checkcode Error");
+            info.setErrorMsg("验证码错误！");
 
             //serializing info object as json
             ObjectMapper mapper = new ObjectMapper();
@@ -65,10 +65,10 @@ public class RegistUserServlet extends HttpServlet {
 
         if (flag) {
             info.setFlag(true);
-            info.setErrorMsg("Regist Success!");
+            //info.setErrorMsg("Regist Success!");
         } else {
             info.setFlag(false);
-            info.setErrorMsg("Regist Fail!");
+            info.setErrorMsg("注册失败！");
         }
 
         // info object serialized as json

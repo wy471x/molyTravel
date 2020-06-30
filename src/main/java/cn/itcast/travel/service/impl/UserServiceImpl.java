@@ -4,6 +4,8 @@ import cn.itcast.travel.dao.UserDao;
 import cn.itcast.travel.dao.impl.UserDaoImpl;
 import cn.itcast.travel.domain.User;
 import cn.itcast.travel.service.UserService;
+import cn.itcast.travel.util.MailUtils;
+import cn.itcast.travel.util.UuidUtil;
 
 public class UserServiceImpl implements UserService {
 
@@ -22,8 +24,35 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+        user.setCode(UuidUtil.getUuid());
+
+        user.setStatus("N");
         userDao.save(user);
+
+        String content = "<a href='http://localhost/travel/activeUserServlet?code=" + user.getCode() + "'>点击激活魔力旅游网</a>";
+        MailUtils.sendMail(user.getEmail(), content, "激活邮件");
         return true;
+    }
+
+    /**
+     * account active
+     * @param code
+     * @return
+     */
+    @Override
+    public boolean active(String code) {
+        User user = userDao.findByCode(code);
+        if (user != null) {
+            userDao.updateStatus(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public User login(User user) {
+        return userDao.findByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 
 }
