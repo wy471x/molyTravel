@@ -13,6 +13,7 @@ import java.io.IOException;
 public class FindUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object user = request.getSession().getAttribute("user");
+        //System.out.println(user.toString());
 
         ObjectMapper mapper = new ObjectMapper();
         response.setContentType("application/json;charset=utf-8");

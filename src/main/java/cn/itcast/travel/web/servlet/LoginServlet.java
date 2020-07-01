@@ -30,8 +30,12 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        System.out.println("username="+user.getUsername());
+        System.out.println("password="+user.getPassword());
         UserService service = new UserServiceImpl();
         User u = service.login(user);
+        System.out.println("username="+user.getUsername());
+        System.out.println("password="+user.getPassword());
 
         ResultInfo info = new ResultInfo();
 
