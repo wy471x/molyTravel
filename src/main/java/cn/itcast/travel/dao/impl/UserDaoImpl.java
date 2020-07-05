@@ -7,6 +7,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.UnsupportedEncodingException;
+
 public class UserDaoImpl implements UserDao {
 
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
@@ -82,6 +84,7 @@ public class UserDaoImpl implements UserDao {
         } catch (Exception e) {
 
         }
+
         return user;
     }
 }

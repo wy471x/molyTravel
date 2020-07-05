@@ -1,5 +1,8 @@
 package cn.itcast.travel.web.servlet;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +19,8 @@ import java.util.Random;
  */
 @WebServlet("/checkCode")
 public class CheckCodeServlet extends HttpServlet {
+	private static Logger log = LogManager.getLogger(CheckCodeServlet.class.getName());
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		
 		//服务器通知浏览器不要缓存
@@ -42,6 +47,8 @@ public class CheckCodeServlet extends HttpServlet {
 		String checkCode = getCheckCode();
 		//将验证码放入HttpSession中
 		request.getSession().setAttribute("CHECKCODE_SERVER",checkCode);
+		log.info("checkCode=" + checkCode);
+
 		
 		//设置画笔颜色为黄色
 		g.setColor(Color.YELLOW);

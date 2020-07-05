@@ -6,6 +6,8 @@ import cn.itcast.travel.service.UserService;
 import cn.itcast.travel.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,14 +21,17 @@ import java.util.Map;
 
 @WebServlet("/registUserServlet")
 public class RegistUserServlet extends HttpServlet {
+    private static Logger log = LogManager.getLogger(RegistUserServlet.class.getName());
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // check code
         String check = request.getParameter("check");
-
+        log.info(check);
         // getting checkcode from session
         HttpSession session = request.getSession();
         String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
         session.removeAttribute("CHECKCODE_SERVER");
+        log.info(checkcode_server);
 
         // make comparsion
         if (checkcode_server == null || !checkcode_server.equalsIgnoreCase(check)) {

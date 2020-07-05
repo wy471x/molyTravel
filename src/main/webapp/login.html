@@ -23,10 +23,12 @@
 	<script>
 		$(function () {
             $("#btn_sub").click(function () {
-                $.post("loginServlet", $("#loginForm").serialize(), function (data) {
+                //$.post("loginServlet", $("#loginForm").serialize(), function (data) {
+                $.post("user/login", $("#loginForm").serialize(), function (data) {
 					if (data.flag) {
 					    location.href="index.html";
 					} else {
+					    $("#errorMsg").addClass("alert alert-danger");
 					    $("#errorMsg").html(data.errorMsg);
 					}
                 });
@@ -51,7 +53,8 @@
         	<div class="login_inner">
 				
 				<!--登录错误提示消息-->
-        		<div id="errorMsg" class="alert alert-danger" ></div>
+				<!--class="alert alert-danger"-->
+        		<div id="errorMsg"></div>
 				<form id="loginForm" action="" method="post" accept-charset="utf-8">
         			<input type="hidden" name="action" value="login"/>
 					<input name="username" type="text" placeholder="请输入账号" autocomplete="off">
