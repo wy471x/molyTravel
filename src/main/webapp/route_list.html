@@ -73,10 +73,10 @@
                     lis += li;
                 }
 
-                var lastPage = '<li class="threeword"><a ' +
-                    'href="javascript:;">末页</a></li>';
-                var nextPage = '<li class="threeword"><a' +
-                    'href="javascript:;">下一页</a></li>';
+                var lastPage = '<li onclick="load('+ cid + ',' + pb.totalPage +')" class="threeword"><a ' +
+                    'href="javascript:void(0);">末页</a></li>';
+                var nextPage = '<li onclick="load('+ cid + ',' + (pb.currentPage + 1) +')" class="threeword"><a ' +
+                    'href="javascript:void(0);">下一页</a></li>';
 
                 lis += nextPage;
                 lis += lastPage;

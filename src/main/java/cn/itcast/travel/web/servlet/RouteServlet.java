@@ -18,11 +18,26 @@ public class RouteServlet extends BaseServlet {
     Logger log = Logger.getLogger(RouteServlet.class);
     private RouteService routeService = new RouteServiceImpl();
 
+    /**
+     * pageing query
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     public void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         log.info("pageQuery executing...");
+        // 1. receive arguments
         String currentPageStr = request.getParameter("currentPage");
         String pageSizeStr = request.getParameter("pageSize");
         String cidStr = request.getParameter("cid");
+
+        // receive rname
+        String rname = request.getParameter("rname");
+        rname = new String(rname.getBytes("iso-8859-1"), "utf-8");
+
+
+        // 2. handling arguments
         int cid = 0;
         if (cidStr != null && cidStr.length() > 0) {
             cid = Integer.parseInt(cidStr);
@@ -42,7 +57,7 @@ public class RouteServlet extends BaseServlet {
             pageSize = 5;
         }
 
-        PageBean<Route> pb = routeService.pageQuery(cid, currentPage, pageSize);
+        PageBean<Route> pb = routeService.pageQuery(cid, currentPage, pageSize, rname);
 
         writeValue(pb, response);
     }
