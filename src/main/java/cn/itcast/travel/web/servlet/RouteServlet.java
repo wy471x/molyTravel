@@ -25,8 +25,8 @@ public class RouteServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    public void pageQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        log.info("pageQuery executing...");
+    public void pageQueryByRouteName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        log.info("pageQueryByRouteName executing...");
         // 1. receive arguments
         String currentPageStr = request.getParameter("currentPage");
         String pageSizeStr = request.getParameter("pageSize");
@@ -34,6 +34,7 @@ public class RouteServlet extends BaseServlet {
 
         // receive rname
         String rname = request.getParameter("rname");
+        log.info(rname);
         rname = new String(rname.getBytes("iso-8859-1"), "utf-8");
 
 
@@ -57,7 +58,39 @@ public class RouteServlet extends BaseServlet {
             pageSize = 5;
         }
 
-        PageBean<Route> pb = routeService.pageQuery(cid, currentPage, pageSize, rname);
+        PageBean<Route> pb = routeService.pageQueryByRouteName(cid, currentPage, pageSize, rname);
+
+        writeValue(pb, response);
+    }
+
+    public void pageQueryAllRoute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        log.info("pageQueryAllRoute executing...");
+        // 1. receive arguments
+        String currentPageStr = request.getParameter("currentPage");
+        String pageSizeStr = request.getParameter("pageSize");
+        String cidStr = request.getParameter("cid");
+
+        // 2. handling arguments
+        int cid = 0;
+        if (cidStr != null && cidStr.length() > 0) {
+            cid = Integer.parseInt(cidStr);
+        }
+        int currentPage = 0;
+        if (currentPageStr != null && currentPageStr.length() > 0) {
+            currentPage = Integer.parseInt(currentPageStr);
+        } else {
+            currentPage = 1;
+        }
+
+        int pageSize = 0;
+
+        if (pageSizeStr != null && pageSizeStr.length() > 0) {
+            pageSize = Integer.parseInt(pageSizeStr);
+        } else {
+            pageSize = 5;
+        }
+
+        PageBean<Route> pb = routeService.pageQueryAllRoute(cid, currentPage, pageSize);
 
         writeValue(pb, response);
     }

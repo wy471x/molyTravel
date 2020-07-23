@@ -13,7 +13,7 @@ public class RouteDaoImpl implements RouteDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
-    public int findTotalCount(int cid, String rname) {
+    public int findTotalCountRouteName(int cid, String rname) {
         String sql = "select count(*) from tab_route where 1=1";
         StringBuilder sb = new StringBuilder(sql);
 
@@ -35,7 +35,15 @@ public class RouteDaoImpl implements RouteDao {
     }
 
     @Override
-    public List<Route> findByPage(int cid, int start, int pageSize, String rname) {
+    public int findTotalCountAllRoute(int cid) {
+        String sql = "select count(*) from tab_route where cid = ?";
+
+        return template.queryForObject(sql, Integer.class, cid);
+    }
+
+
+    @Override
+    public List<Route> findByPageRouteName(int cid, int start, int pageSize, String rname) {
         String sql = "select * from tab_route where 1=1";
         StringBuilder sb = new StringBuilder(sql);
         List params = new ArrayList();
@@ -55,5 +63,12 @@ public class RouteDaoImpl implements RouteDao {
         params.add(start);
         params.add(pageSize);
         return template.query(sql, new BeanPropertyRowMapper<Route>(Route.class), params.toArray());
+    }
+
+    @Override
+    public List<Route> findByPageAllRoute(int cid, int start, int pageSize) {
+        String sql = "select * from tab_route where cid = ? limit ?, ?";
+
+        return template.query(sql, new BeanPropertyRowMapper<Route>(Route.class), cid, start, pageSize);
     }
 }
