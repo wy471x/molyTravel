@@ -10,4 +10,6 @@ public interface RouteDao {
 
     List<Route> findByPageRouteName(int cid, int start, int pageSize, String rname);
     List<Route> findByPageAllRoute(int cid, int start, int pageSize);
+
+    Route findOne(int rid);
 }

@@ -114,7 +114,7 @@
                             '                                <span>' + route.price + '</span>\n' +
                             '                                <span>起</span>\n' +
                             '                            </p>\n' +
-                            '                            <p><a href="route_detail.html">查看详情</a></p>\n' +
+                            '                            <p><a href="route_detail.html?rid='+  route.rid + '">查看详情</a></p>\n' +
                             '                        </div>\n' +
                             '                    </li>';
                         route_lis += li;
@@ -197,6 +197,7 @@
                 if (pb.currentPage <= pb.totalPage) {
                     var route_lis = "";
                     for (var i = 0; i < pb.list.length; ++i) {
+                        //alert(route.rid);
                         var route = pb.list[i];
                         var li = '<li>\n' +
                             '                        <div class="img"><img src="' + route.rimage + '"style="width: 299px;"></div>\n' +
@@ -211,7 +212,7 @@
                             '                                <span>' + route.price + '</span>\n' +
                             '                                <span>起</span>\n' +
                             '                            </p>\n' +
-                            '                            <p><a href="route_detail.html">查看详情</a></p>\n' +
+                            '                            <p><a href="route_detail.html?rid='+  route.rid + '">查看详情</a></p>\n' +
                             '                        </div>\n' +
                             '                    </li>';
                         route_lis += li;

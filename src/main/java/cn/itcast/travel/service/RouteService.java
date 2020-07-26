@@ -7,4 +7,8 @@ public interface RouteService {
 
     PageBean<Route> pageQueryByRouteName(int cid, int currentPage, int pageSize, String rname);
     PageBean<Route> pageQueryAllRoute(int cid, int currentPage, int pageSize);
+
+    Route findOne(String rid);
+
+
 }
